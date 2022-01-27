@@ -6,17 +6,15 @@ using namespace std;
 class Solution{
 public:
     int cat(int n){
-
         int c=0;
-        
-        if(n==0)return 1;
-        
+        if(n==0){
+            return 1;
+        }
         for(int i=0; i<n; i++){
-        
-        c+=cat(i)*cat(n-i-1);}
-        
+            c+=cat(i)*cat(n-i-1);
+            
+        }
         return c;
-        
     }
     int count(int N){
         // code here
