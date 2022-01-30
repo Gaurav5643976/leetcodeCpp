@@ -27,7 +27,7 @@ class Solution{
             }
             //cout<<endl;
         }
-        int ma=0;
+        int ma=INT_MIN;
         for(int i=k-1;i<N;i++){
             for(int j=k-1;j<N;j++){
                 int ans=mat[i][j];
