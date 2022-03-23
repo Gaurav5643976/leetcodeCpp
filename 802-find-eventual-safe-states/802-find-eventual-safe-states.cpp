@@ -16,6 +16,7 @@ public:
         }
         int sz=ans.size();
         while(1){
+            int added=-1;
             for(auto itr:um){
                 int i=itr.first;
                 bool flag=true;
@@ -28,7 +29,11 @@ public:
                 if(flag and st.find(i)==st.end()){
                     ans.push_back(i);
                     st.insert(i);
+                    added=i;
                 }
+            }
+            if(added!=-1){
+                um.erase(added);
             }
             if(sz==ans.size()){
                 break;
