@@ -4,17 +4,22 @@ public:
         vector<int> ans;
         int n=graph.size();
         unordered_set<int> st;
+        unordered_map<int,vector<int>> um;
         for(int i=0;i<n;i++){
             if(graph[i].size()==0){
                 ans.push_back(i);
                 st.insert(i);
             }
+            else{
+                um[i]=graph[i];
+            }
         }
         int sz=ans.size();
         while(1){
-            for(int i=0;i<n;i++){
+            for(auto itr:um){
+                int i=itr.first;
                 bool flag=true;
-                for(auto j:graph[i]){
+                for(auto j:itr.second){
                     if(st.find(j)==st.end()){
                         flag=false;
                         break;
