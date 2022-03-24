@@ -12,14 +12,15 @@ public:
         vector<bool> vis(n,false);
         queue<int> q;
         q.push(0);
+        vis[0]=true;
         while(!q.empty()){
             int node=q.front();
             q.pop();
-            if(!vis[node]){
-                vis[node]=true;
-                for(auto i:adjList[node]){
+            for(auto i:adjList[node]){
+                if(!vis[i]){
                     q.push(i);
-                    if(!vis[i] and s.count({node,i})){
+                    vis[i]=true;
+                    if(s.count({node,i})){
                         ans++;
                     }
                 }
