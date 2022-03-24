@@ -1,9 +1,13 @@
 class Solution {
 public:
     bool canMeasureWater(int x, int y, int z) {
+        if(x+y<z){
+            return false;
+        }
         unordered_set<int> st;
         queue<int> q;
         q.push(0);
+        st.insert(0);
         vector<int> dir={x,-x,y,-y};
         while(!q.empty()){
             int f=q.front();
