@@ -1,77 +1,31 @@
 class Solution {
 public:
-    // Class to carry three values at a time
-    class tuple
-    {
-        public:
-        int node; // on which current node we are standing
-        int mask; // mask of that node
-        int cost; // cost of path explore by this node
-        tuple(int node, int mask, int cost)
-        {
-            this -> node = node;
-            this -> mask = mask;
-            this -> cost = cost;
-        }
-    };
-    
-    
     int shortestPathLength(vector<vector<int>>& graph) {
-        // total number of nodes present
-        int n = graph.size(); // extracting size of graph
-        
-        
-        queue<tuple> q; // queue of class tuple type
-        
-         // set to take care which path we have already visited
-        set<pair<int, int>> vis;
-        
-        int all = (1 << n) - 1; // if all nodes visited then
-            
-        // we don't know which node will give us shortest path so intially for all nodes we will store in our queue
-        for(int i = 0; i < n; i++)
-        {
-            int maskValue = (1 << i); // 2 ^ i
-            
-            tuple thisNode(i, maskValue, 1); // make a tuple for every nod
-            
-            q.push(thisNode); // push tuple into our queue
-            
-            vis.insert({i, maskValue}); // also update into our set
+        int n=graph.size();
+        if(n==1){
+            return 0;
         }
-        
-        // Implementing BFS
-        while(q.empty() == false) // until queue is not empty
-        {
-            tuple curr = q.front(); // extracting front tuple
-            q.pop(); 
-            if(curr.mask == all) 
-            {
-                return curr.cost - 1;
+        int finalState=(1<<n)-1;
+        vector<vector<bool>> vis(n,vector<bool>(finalState+1,false));
+        queue<vector<int>> q;
+        for(int i=0;i<n;i++){
+            q.push({i,1<<i,0});
+            vis[i][1<<i]=true;
+        }
+        while(!q.empty()){
+            vector<int> v=q.front();
+            q.pop();
+            if(v[1]==finalState){
+                return v[2];
             }
-            
-            // if not, start exploring in its adjcant
-            for(auto &adj: graph[curr.node])
-            {
-                int bothVisitedMask = curr.mask; // current mask
-                
-                // we are moving from one node o anthor node
-                bothVisitedMask = bothVisitedMask | (1 << adj); 
-                
-                // make tuple of this path
-                tuple ThisNode(adj, bothVisitedMask, curr.cost + 1);
-                
-                // if this path is not explored i.e
-                // if it is not present in our set then,
-                if(vis.find({adj, bothVisitedMask}) == vis.end())
-                {
-                    vis.insert({adj, bothVisitedMask}); // insert into set
-                    
-                    q.push(ThisNode); 
+            for(auto i:graph[v[0]]){
+                int newVisitedState=v[1]|(1<<i);
+                if(!vis[i][newVisitedState]){
+                    vis[i][newVisitedState]=true;
+                    q.push({i,newVisitedState,v[2]+1});
                 }
             }
-            
         }
-        return -1;
+        return 0;
     }
 };
