@@ -1,7 +1,7 @@
 class Solution {
 public:
-    set<string> generateNext(string str){
-        set<string> st;
+    unordered_set<string> generateNext(string str){
+        unordered_set<string> st;
         string temp=str;
         for(int i=0;i<4;i++){
             char c=temp[i];
