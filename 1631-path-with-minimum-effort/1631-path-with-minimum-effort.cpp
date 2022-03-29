@@ -11,6 +11,12 @@ public:
         while(!pq.empty()){
             vi v=pq.top();
             pq.pop();
+            if(v[0]>dist[v[1]][v[2]]){
+                continue;
+            }
+            if(v[1]==m-1 and v[2]==n-1){
+                return v[0];
+            }
             for(auto i:dir){
                 int x=v[1]+i[0],y=v[2]+i[1];
                 if(x>=0 and x<m and y>=0 and y<n){
