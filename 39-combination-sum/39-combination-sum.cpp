@@ -1,25 +1,25 @@
 class Solution {
 public:
-    void solve(vector<int>& c,int target,vector<int>& v,vector<vector<int>>& ans,int i){
-        if(i==c.size()){
+    void solve(vector<int>& c,int target,int indx,vector<vector<int>>& ans,vector<int>& v){
+        int n=c.size();
+        if(n==indx){
             if(target==0){
                 ans.push_back(v);
             }
             return;
         }
-        // if take present element
-        if(c[i]<=target){
-            v.push_back(c[i]);
-            solve(c,target-c[i],v,ans,i);
+        if(target>=c[indx]){
+            v.push_back(c[indx]);
+            solve(c,target-c[indx],indx,ans,v);
             v.pop_back();
         }
-        //if not take the present element
-        solve(c,target,v,ans,i+1);
+        solve(c,target,indx+1,ans,v);
+        
     }
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
         vector<vector<int>> ans;
         vector<int> v;
-        solve(candidates,target,v,ans,0);
+        solve(candidates,target,0,ans,v);
         return ans;
     }
 };
