@@ -14,10 +14,10 @@ class Solution{
         // Complete the function
         set<int> s;
         long long ans = -1;
-        vector<int> res,suff;
-        for(int i=0;i<n;i++){
-            suff.push_back(arr[i]);
-        }
+        vector<int> res,suff(n);
+        // for(int i=0;i<n;i++){
+        //     suff.push_back(arr[i]);
+        // }
         for(int i=n-1;i>=0;i--){
             suff[i] = arr[i];
             if(i+1<n){
