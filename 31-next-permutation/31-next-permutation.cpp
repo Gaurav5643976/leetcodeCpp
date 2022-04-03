@@ -14,6 +14,7 @@ public:
                 }
                 swap(nums[i-1],nums[indx]);
                 indx=i;
+                
                 break;
             }
         }
