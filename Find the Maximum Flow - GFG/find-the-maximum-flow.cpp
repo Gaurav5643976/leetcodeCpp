@@ -76,17 +76,7 @@ public:
    int solve(int N,int M,vector<vector<int>> Edges)
    {
        // code here
-       vector<vector<int>> graph;
-       
-       for(int i=0;i<N;i++)
-       {
-           vector<int> v1;
-           for(int j=0;j<N;j++)
-           {
-               v1.push_back(0);
-           }
-           graph.push_back(v1);
-       }
+       vector<vector<int>> graph(N,vector<int>(N,0));
        
        for(auto x: Edges)
        {
