@@ -5,12 +5,11 @@ public:
         int freq[26]={0};
         int left=0,right=0;
         int longestSubs=0;
-        int flag=left;
+        bool flag=true;
         while(right<n and left<=right){
-            if(flag==left){
+            if(flag==true){
                 freq[s[right]-'A']++;
             }
-            flag=left;
             int maxFreq=*max_element(freq,freq+26);
             int windowLen=right-left+1;
             int charNeeded=windowLen-maxFreq;
@@ -18,10 +17,12 @@ public:
             if(charNeeded<=k){
                 longestSubs=max(longestSubs,windowLen);
                 right++;
+                flag=true;
             }
             else{
                 freq[s[left]-'A']--;
                 left++;
+                flag=false;
             }
         }
         return longestSubs;
