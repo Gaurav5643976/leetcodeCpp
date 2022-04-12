@@ -17,13 +17,11 @@ public:
         if(list2==NULL){
             return list1;
         }
-        ListNode* mergedList=new ListNode();
+        ListNode* mergedList=new ListNode(min(list1->val,list2->val));
         if(list1->val<list2->val){
-            mergedList->val=list1->val;
             mergedList->next=mergeTwoLists(list1->next,list2);
         }
         else{
-            mergedList->val=list2->val;
             mergedList->next=mergeTwoLists(list1,list2->next);
         }
         return mergedList;
