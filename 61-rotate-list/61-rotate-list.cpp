@@ -11,7 +11,7 @@
 class Solution {
 public:
     ListNode* rotateRight(ListNode* head, int k) {
-        if(head==NULL or head->next==NULL){
+        if(k==0 or head==NULL or head ->next==NULL){
             return head;
         }
         int noOfNodes=0;
@@ -20,23 +20,23 @@ public:
             noOfNodes++;
             temp=temp->next;
         }
-        if(k%noOfNodes==0){
+        k%=noOfNodes;
+        if(k==0){
             return head;
         }
-        int breakPoint=noOfNodes-k%noOfNodes;
-        ListNode *p=NULL,*q=head;
-        while(breakPoint--){
-            p=q;
-            q=q->next;
+        int breakPoint=noOfNodes-k;
+        ListNode *cur=head,*pre=NULL;
+        while(cur and breakPoint--){
+            pre=cur;
+            cur=cur->next;
         }
-        p->next=NULL;
-        p=q;
-        ListNode* ans=q;
-        while(q){
-            p=q;
-            q=q->next;
+        pre->next=NULL;
+        ListNode* ans=cur;
+        while(cur){
+            pre=cur;
+            cur=cur->next;
         }
-        p->next=head;
+        pre->next=head;
         return ans;
     }
 };
