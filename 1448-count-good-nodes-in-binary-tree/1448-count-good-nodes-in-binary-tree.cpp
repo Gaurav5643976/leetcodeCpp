@@ -11,20 +11,23 @@
  */
 class Solution {
 public:
-    void solve(TreeNode* r,int& count,int v){
-        if(!r){
+    void solve(TreeNode* r,int& count,int ma){
+        if(r==NULL){
             return;
         }
-        int ma=max(v,r->val);
-        if(ma==r->val){
+        ma=max(ma,r->val);
+        if(r->val>=ma){
             count++;
         }
         solve(r->left,count,ma);
         solve(r->right,count,ma);
     }
     int goodNodes(TreeNode* root) {
-        int count=0;
-        solve(root,count,INT_MIN);
+        if(root==NULL){
+            return 0;
+        }
+        int count=0,ma=INT_MIN;
+        solve(root,count,ma);
         return count;
     }
 };
