@@ -12,24 +12,22 @@
 class Solution {
 public:
     int ans=0;
-    void helper(TreeNode* root, long long target){
-        if(root==NULL){
+    void solve(TreeNode* r,int t,long long sum,unordered_map<int,int> um){
+        if(r==NULL){
             return;
         }
-        if(root->val==target){
-            ans++;
+        sum+=r->val;
+        if(um.find(sum-t)!=um.end()){
+            ans+=um[sum-t];
         }
-        target-=root->val;
-        helper(root->left,target);
-        helper(root->right,target);
+        um[sum]++;
+        solve(r->left,t,sum,um);
+        solve(r->right,t,sum,um);
     }
-    int pathSum(TreeNode* root, int target) {
-        if(root==NULL){
-            return 0;
-        }
-        helper(root,target);
-        pathSum(root->left,target);
-        pathSum(root->right,target);
+    int pathSum(TreeNode* root, int targetSum) {
+        unordered_map<int,int> um;
+        um[0]=1;
+        solve(root,targetSum,0,um);
         return ans;
     }
 };
