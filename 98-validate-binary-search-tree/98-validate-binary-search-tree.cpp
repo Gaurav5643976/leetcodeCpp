@@ -11,19 +11,20 @@
  */
 class Solution {
 public:
-    void solve(TreeNode* r,long long& last,bool& isValid){
+    void solve(TreeNode* r,TreeNode*& last,bool& isValid){
         if(r==NULL){
             return;
         }
         solve(r->left,last,isValid);
-        if(last!=LLONG_MIN and last>=r->val){
+        if(last and last->val>=r->val){
+            cout<<last->val<<" "<<r->val;
             isValid=false;
         }
-        last=r->val;
+        last=r;
         solve(r->right,last,isValid);
     }
     bool isValidBST(TreeNode* root) {
-        long long last=LLONG_MIN;
+        TreeNode* last=NULL;
         bool isValid=true;
         solve(root,last,isValid);
         return isValid;
