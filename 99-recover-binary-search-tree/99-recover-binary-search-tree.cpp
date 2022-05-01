@@ -11,26 +11,26 @@
  */
 class Solution {
 public:
-    
-    TreeNode *first=NULL,*second=NULL;
     TreeNode* prev=new TreeNode(INT_MIN);
-    void solve(TreeNode* r){
+    TreeNode *first=NULL, *second=NULL;
+    void inorderTraversal(TreeNode* r){
         if(!r){
             return;
         }
-        solve(r->left);
+        inorderTraversal(r->left);
         if(first==NULL and prev->val>r->val){
             first=prev;
+            //second=r;
         }
         if(first!=NULL and prev->val>r->val){
             second=r;
         }
         prev=r;
-        solve(r->right);
+        inorderTraversal(r->right);
     }
     void recoverTree(TreeNode* root) {
-        solve(root);
-        //cout<<first<<" "<<second;
+        inorderTraversal(root);
+        //cout<<first->val<<" "<<second->val;
         swap(first->val,second->val);
     }
 };
