@@ -15,10 +15,10 @@ public:
         if(r==NULL){
             return;
         }
-        ma=max(ma,r->val);
         if(r->val>=ma){
             count++;
         }
+        ma=max(ma,r->val);
         solve(r->left,count,ma);
         solve(r->right,count,ma);
     }
